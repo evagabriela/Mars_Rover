@@ -1,11 +1,13 @@
 class Rover
  
    attr_reader :x, :y, :orientation
+   attr_accessor :grid
  
-   def initialize(x, y, orientation)
+   def initialize(x, y, orientation, grid)
      @x = x
      @y = y
      @orientation = orientation
+     @grid = grid
    end
  
    
@@ -73,16 +75,7 @@ class Rover
  end
    
  
- class Grid
-   def initialize(rows, columns)
-     @rows = rows
-     @columns = columns
-   end
- 
-   def new_grid
-     Array.new(@rows, Array.new(@columns))
-   end
- end
+
  
  
  rover = Rover.new(1, 2, "N")
