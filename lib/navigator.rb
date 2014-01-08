@@ -15,9 +15,9 @@ class Navigator
     directions.split("").each do |directions|
       case directions
       when "L"
-        @rover.rotate_rover(@rover.orientation, directions)
+        @rover.rotate_rover(directions)
       when "R"
-        @rover.rotate_rover(@rover.orientation, directions)
+        @rover.rotate_rover(directions)
       when "M"
         @rover.move_to_new_grid(@rover.orientation)
       else
@@ -31,18 +31,18 @@ end
 
 
 # Driving Code
-navigator = Navigator.new
-navigator.select_grid_size(5,5)
-puts "rover 1"
-navigator.select_rover(1,2,"N")
-navigator.direct_rover("LMLMLMLMM")
-p navigator.rover
-p navigator.rover.grid.grid
-puts "----"
-puts "rover 2"
-navigator.select_rover(1,3,"N")
-navigator.direct_rover("MMRMMRMRRM")
-p navigator.rover
-p navigator.rover.grid.grid 
+# navigator = Navigator.new
+# navigator.select_grid_size(5,5)
+# puts "rover 1"
+# navigator.select_rover(1,2,"N")
+# navigator.direct_rover("LMLMLMLMM")
+# p navigator.rover
+# p navigator.rover.grid.grid
+# puts "----"
+# puts "rover 2"
+# navigator.select_rover(1,3,"N")
+# navigator.direct_rover("MMRMMRMRRM")
+# p navigator.rover
+# p navigator.rover.grid.grid 
 
 

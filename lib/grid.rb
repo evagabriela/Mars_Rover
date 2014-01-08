@@ -2,7 +2,7 @@ class Grid
    attr_reader :grid, :height, :width
 
    def initialize(height, width)
-     @grid = Array.new(height + 1) {Array.new(width + 1)}
+     @grid = Array.new(height) {Array.new(width)}
      @height = height
      @width = width
    end

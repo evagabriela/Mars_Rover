@@ -9,7 +9,7 @@ puts "What would you like to be the size of your grid? (such as height, width =>
     p navigator.grid.grid[i]
   end
 
-puts "What coordinates would you like to input for the rover (such as x,y,orientation)"
+puts "What coordinates would you like to input for the rover (such as x,y,orientation, example 3,3,E)"
   input = gets.chomp
   coordinates = input.split(",")
   navigator.select_rover(coordinates[0].to_i, coordinates[1].to_i, coordinates[2].upcase)

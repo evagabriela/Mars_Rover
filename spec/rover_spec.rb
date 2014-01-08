@@ -4,7 +4,7 @@ require '../lib/rover.rb'
  
  describe Rover do 
   before(:each) do
-    @grid = mock(Grid)
+    @grid = double(Grid)
     @grid.stub(:height).and_return(5)
     @grid.stub(:width).and_return(5)
     @grid.stub(:grid).and_return(Array.new(@grid.height + 1){Array.new(@grid.width + 1)})
@@ -13,12 +13,12 @@ require '../lib/rover.rb'
 
   describe "#rotate_rover" do 
     it "rotates the rover left if the direction given is L" do
-     @rover.rotate_rover(@rover.orientation, "L")
+     @rover.rotate_rover("L")
      @rover.orientation.should eq("W")
     end
 
     it "rotates the rover right if the direction given is R" do
-      @rover.rotate_rover(@rover.orientation, "R")
+      @rover.rotate_rover("R")
       @rover.orientation.should eq("E")
     end
   end
