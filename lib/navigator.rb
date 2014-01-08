@@ -35,6 +35,7 @@ class Navigator
   end
 end
 
+
 # Driving Code
 navigator = Navigator.new
 navigator.select_grid_size(5,5)
@@ -49,3 +50,5 @@ navigator.select_rover(1,3,"N")
 navigator.direct_rover("MMRMMRMRRM")
 p navigator.rover
 p navigator.rover.grid.grid 
+
+

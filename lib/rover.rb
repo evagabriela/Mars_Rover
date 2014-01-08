@@ -1,3 +1,5 @@
+require_relative './grid'
+
 class Rover
  
    attr_reader :x, :y, :orientation
@@ -9,80 +11,108 @@ class Rover
      @orientation = orientation
      @grid = grid
    end
- 
-   
-   def move(string)
-     directions = string.split("")
-     directions.each do |letter|
-       if letter == "L"
-         rotate_rover(@orientation, letter)
-       elsif letter == "R"
-         rotate_rover(@orientation, letter)
-       elsif letter == "M"
-         move_to_new_grid(@orientation)
-       end
-     end
-   end
- 
-   private
- 
-   def move_to_new_grid(orientation)
-     if @orientation == "N"
-       @y += 1
-     elsif @orientation == "E"
-       @x += 1
-     elsif @orientation == "S"
-       @y -= 1
-     elsif @orientation == "W"
-       @x -= 1
-     end
-   end
- 
+  
    def rotate_rover(orientation, direction)
      rotations= ["N", "E", "S", "W"]
-     if turn_right?(direction)
-       if last_element?(rotations, orientation)
-         @orientation = rotations[0]
-       elsif 
-        @orientation = rotations[(rotations.index(orientation) + 1)] 
-       end
-     elsif turn_left?(direction)
-       if first_element?(rotations, orientation)
-         @orientation = rotations[-1]
-       elsif 
-         @orientation = rotations[(rotations.index(orientation) - 1)] 
-       end
+     direction == "R" ? turn_right(rotations, orientation) : turn_left(rotations, orientation)
+   end
+ 
+   def move_to_new_grid(orientation)
+     @grid.grid.reverse[@y][@x] = nil
+     case orientation
+     when "N" 
+       increase_y_coordinate
+     when "E" 
+       increase_x_coordinate
+     when "S" 
+       decrease_y_coordinate
+     when "W" 
+       decrease_x_coordinate
      end
    end
-   
  
+   def final_position(x,y,orientation)
+     @grid.grid.reverse[y][x] = orientation
+   end
+
+   def coordinates(x,y,orientation)
+    "x: #{@x}, y: #{@y}, orientation: #{@orientation}"
+   end
+
+   private
+
+   def turn_left(array, orientation)
+    if first_element?(array,orientation)
+      @orientation = array[-1]
+    else
+      @orientation = array[(array.index(orientation)-1)]
+    end
+   end
+ 
+   def turn_right(array, orientation)
+     if last_element?(array, orientation)
+      @orientation = array[0]
+     else
+      @orientation = array[(array.index(orientation)+1)]
+     end
+   end  
+
+   def decrease_y_coordinate
+     raise StandardError, "error, invalid move! coordinates values must be greater than or equal to zero" if @y == 0 
+     @y -= 1 if @grid.available?(@x, (@y-1))
+   end
+
+   def decreate_x_coordinate
+      raise StandardError, "invalid move coordinate values must be greater than or equal to zero" if @x == 0
+      @x -= 1 if @grid.available?(@x-1, @y)  
+   end
+
+   def increase_y_coordinate
+     raise StandardError, "invalid move: coordinate values cannot exceed the grid size" if @y == @grid.height
+     @y+=1 if @grid.available?(@x, (@y+1))
+   end
+
+   def increase_x_coordinate
+     raise StandardError, "invalid move: coordinate values cannot exceed the grid size" if @x == @grid.width
+     @x+=1 if @grid.available?(@x+1, @y)
+    end
+
    def last_element?(array, element)
      array.index(element) == (array.length - 1)
-   end
- 
+    end
+
    def first_element?(array, element)
      array.index(element) == 0
-   end
- 
-   def turn_right?(direction)
-     direction == "R"
-   end
- 
- 
-   def turn_left?(direction)
-     direction == "L"
-   end
+    end
+
  end
    
  
 
  
- 
- rover = Rover.new(1, 2, "N")
- move = rover.move("LMLMLMLMM")
- puts "#{rover.x}, #{rover.y} #{rover.orientation}"
- p move
- rover = Rover.new(3, 3, "E")
- move = rover.move("MMRMMRMRRM")
- puts "#{rover.x}, #{rover.y} #{rover.orientation}"
- p move
+ # ====>   Old driver code   <======
+ # rover = Rover.new(1, 2, "N")
+ # move = rover.move("LMLMLMLMM")
+ # puts "#{rover.x}, #{rover.y} #{rover.orientation}"
+ # p move
+ # rover = Rover.new(3, 3, "E")
+ # move = rover.move("MMRMMRMRRM")
+ # puts "#{rover.x}, #{rover.y} #{rover.orientation}"
+ # p move
+
+
+ # ====> New driver code  <====
+
+ # grid = Grid.new(5,5)
+ # rover = Rover.new(5, 5, "N", grid)
+ # rover.move_to_new_grid("S")
+ # rover.final_position(5, 4, "S")
+ # puts "#{rover.x}, #{rover.y} #{rover.orientation}"
+ # p rover.grid.grid
+ # puts "rover 2"
+ # rover2 = Rover.new(5, 5, "E", grid)
+ # rover2.move_to_new_grid("S")
+ # rover.final_position(5, 4, "S")
+ # p rover2.grid.grid
+ # puts "#{rover.x}, #{rover.y} #{rover.orientation}"
+
