@@ -13,15 +13,15 @@ class Navigator
 
   def direct_rover(directions)
     directions.split("").each do |directions|
-      case direction
+      case directions
       when "L"
-        @rover.rotate_rover(@rover.orientation, direction)
+        @rover.rotate_rover(@rover.orientation, directions)
       when "R"
-        @rover.rotate_rover(@rover.orientation, direction)
+        @rover.rotate_rover(@rover.orientation, directions)
       when "M"
         @rover.move_to_new_grid(@rover.orientation)
       else
-        raise ArgumentError, "#{direction} is not a valid direction. The direction must be L, R, M"
+        raise ArgumentError, "#{directions} is not a valid direction. The direction must be L, R, M"
       end
     end
     @rover.final_position(@rover.x, @rover.y, @rover.orientation)

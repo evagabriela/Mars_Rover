@@ -42,27 +42,27 @@ class Rover
    private
 
    def turn_left(array, orientation)
-    if first_element?(array,orientation)
-      @orientation = array[-1]
-    else
-      @orientation = array[(array.index(orientation)-1)]
-    end
+     if first_element?(array, orientation)
+       @orientation = array[-1]
+     else
+       @orientation = array[(array.index(orientation) - 1)] 
+     end
    end
  
    def turn_right(array, orientation)
      if last_element?(array, orientation)
-      @orientation = array[0]
+       @orientation = array[0]
      else
-      @orientation = array[(array.index(orientation)+1)]
-     end
-   end  
+       @orientation = array[(array.index(orientation) + 1)] 
+     end    
+   end
 
    def decrease_y_coordinate
      raise StandardError, "error, invalid move! coordinates values must be greater than or equal to zero" if @y == 0 
      @y -= 1 if @grid.available?(@x, (@y-1))
    end
 
-   def decreate_x_coordinate
+   def decrease_x_coordinate
       raise StandardError, "invalid move coordinate values must be greater than or equal to zero" if @x == 0
       @x -= 1 if @grid.available?(@x-1, @y)  
    end
