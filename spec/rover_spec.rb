@@ -11,8 +11,7 @@ require '../lib/rover.rb'
     @rover = Rover.new(1,1,"N", @grid)
   end
 
-  describe "#rotate_rover" do
- 
+  describe "#rotate_rover" do 
     it "rotates the rover left if the direction given is L" do
      @rover.rotate_rover(@rover.orientation, "L")
      @rover.orientation.should eq("W")

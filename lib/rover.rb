@@ -109,6 +109,7 @@ class Rover
  # rover.final_position(5, 4, "S")
  # puts "#{rover.x}, #{rover.y} #{rover.orientation}"
  # p rover.grid.grid
+ # p "---------"
  # puts "rover 2"
  # rover2 = Rover.new(5, 5, "E", grid)
  # rover2.move_to_new_grid("S")

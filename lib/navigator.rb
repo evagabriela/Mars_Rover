@@ -27,12 +27,6 @@ class Navigator
     @rover.final_position(@rover.x, @rover.y, @rover.orientation)
   end
 
-
-  private
-
-  def valid_direction?(direction)
-    direction == "L" || direction == "R" || direction == "M"
-  end
 end
 
 
